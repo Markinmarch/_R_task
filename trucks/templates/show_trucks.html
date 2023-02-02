@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        td, tr, th, table {
+            border: solid 2px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    </style>
+    <div class="select_truck", style="padding:20px;">
+        <form action="" method="post">
+            {% csrf_token %}
+            <select name="model" required>
+            <option>Все модели</option>
+            {% for name in filter_trucks_name %}
+            <option value="{{name.model}}">{{name.model}}</option>
+            {% endfor %}
+            <input type="submit" value="Применить">
+            </select>
+        </form>
+    </div>
+        <div class="show-trucks">
+            <table>
+                <tr>
+                    <th>Бортовой<br>номер</th>
+                    <th>Модель</th>
+                    <th>Максимальная<br>грузоподъёмность</th>
+                    <th>Текущий вес</th>
+                    <th>Перегрузка, %</th>
+                </tr>
+                {% for item in trucks_info %}
+                <tr>
+                    <td>{{ item.number }}</td>
+                    <td>{{ item.model }}</td>
+                    <td>{{ item.tonnage }}</td>
+                    <td>{{ item.workload }}</td>
+                    <td>{{ item.overload }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <br>
+    <form action="/add_trucks">
+        <input type="submit" value="Добавить транспорт">
+    </form>
+    
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        form {
+            text-align: center;
+        }
+        input {
+            padding: 10px 30px;
+            margin: 5px;
+        }
+    </style>
+    <form method="post">
+        {% csrf_token %}
+        <label><p>Модель</p>{{form.model}}</label>
+        <label><p>Бортовой номер</p>{{form.number}}</label>
+        <label><p>Грузоподъёмность</p>{{form.tonnage}}</label>
+        <label><p>Текущий вес</p>{{form.workload}}</label>
+        <label><p>Перегруз</p>{{form.overload}}</label>
+        <br/>
+        <input type="submit" value="Добавить">
+    </form>
+    <form action="/">
+        <input type="submit" value="Отменить">
+    </form>
+
+{% endblock content %}
